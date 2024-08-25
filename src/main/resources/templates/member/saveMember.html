@@ -24,13 +24,13 @@
 
     <div>
       <label for="businessName">상호명 : </label>
-      <input th:field="*{businessName}" id="businessName">
+      <input th:field="*{businessName}" id="businessName" th:errorclass="field-error">
       <div class="field-error" th:errors="*{businessName}"></div>
     </div>
 
     <div>
       <label for="businessNum">사업자번호 : </label>
-      <input th:field="*{businessNum}" id="businessNum">
+      <input th:field="*{businessNum}" id="businessNum" th:errorclass="field-error">
       <div class="field-error" th:errors="*{businessNum}"></div>
     </div>
 

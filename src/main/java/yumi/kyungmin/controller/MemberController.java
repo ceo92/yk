@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,7 +36,10 @@ public class MemberController {
   }
 
   @PostMapping("members/save")
-  public String saveMemberForm(@ModelAttribute("member") MemberDto memberDto  , RedirectAttributes redirectAttributes){
+  public String saveMemberForm(@Validated @ModelAttribute("member") MemberDto memberDto  , BindingResult bindingResult , RedirectAttributes redirectAttributes){
+    if (bindingResult.hasErrors()){
+      return "member/saveMember";
+    }
     memberService.join(memberDto);
     return "redirect:/members";
   }
