@@ -4,20 +4,18 @@
 <mapper namespace="yumi.kyungmin.mapper.ItemMapper">
 
   <insert id="save" keyProperty="id" useGeneratedKeys="true">
-    insert into(item_name , price , stock_quantity)
-    values(#{itemDto.itemName} , #{itemDto.price} , #{itemDto.stockQuantity})
-
+    insert into(item_name , price , stock_quantity , register_date , update_date , member_id)
+    values(#{itemName} , #{price} , #{stockQuantity} , #{registerDate} , #{updateDate})
   </insert>
-
+  <!--누가 상품 등록했는지는 나중에 , 로그인까지 구현해야됨-->
   <update id="update">
     update item
-    set item_name = #{itemDto.itemName} , price = #{itemDto.price} , stock_quantity = #{itemDto.stockQuantity}
+    set item_name = #{itemName} , price = #{price} , stock_quantity = #{stockQuantity} , update_date = #{updateDate}
     where id = #{id}
-
   </update>
 
   <select id="findById" resultType="Item">
-    select id , item_name , price , stock_quantity
+    select id , item_name , price , stock_quantity , register_date , update_date
     from item where id = #{id}
 
   </select>

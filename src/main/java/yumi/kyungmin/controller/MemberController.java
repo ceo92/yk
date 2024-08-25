@@ -44,4 +44,11 @@ public class MemberController {
     return "redirect:/members";
   }
 
+  /**
+   * 로그인 관리
+   */
+  public String login(){
+
+  }
+
 }

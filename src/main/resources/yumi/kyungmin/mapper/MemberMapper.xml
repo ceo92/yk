@@ -17,7 +17,7 @@
   </select>
 
   <select id="findAll" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
-    select id , member_name , business_name , business_num
+    select *
     from member
   </select>
 

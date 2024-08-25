@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
 import yumi.kyungmin.dto.MemberDto;
@@ -11,12 +12,12 @@ import yumi.kyungmin.dto.MemberDto;
 @Mapper
 public interface ItemMapper {
 
-  Long save(ItemDto itemDto);
+  Long save(Item item);
 
 
-  void update(@Param("id") Long id , @Param("itemDto") ItemDto itemDto);
-  Optional<Member> findById(Long id);
+  void update(Item item);
+  Optional<Item> findById(Long id);
 
-  List<Member> findAll();
+  List<Item> findAll();
 
 }
