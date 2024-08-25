@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+
+  <style>
+    table {
+            width: 50%;
+            border-collapse: collapse; /* 테이블의 셀 간의 간격을 없애고, 선을 하나로 만듭니다. */
+        }
+        th, td {
+            border: 1px solid black; /* 각 셀에 검은색 테두리를 추가합니다. */
+            padding: 8px; /* 셀 내부의 여백을 줍니다. */
+            text-align: center; /* 텍스트를 가운데 정렬합니다. */
+        }
+  </style>
 </head>
 <body>
 <h1>상품 목록</h1>
@@ -29,13 +39,16 @@
     <td th:text="${item.stockQuantity}">재고 수량</td>
     <td th:text="${{item.registerDate}}">등록 날짜</td>
     <td th:text="${{item.updateDate}}">수정 날짜</td>
+    <td><button type="button" class="btn btn-primary" th:text="수정하기" th:onclick="|location.href='@{/items/update/{id}(id = ${item.id})}'|"></button></td>
+
     <!--<td th:text="${item.member,memberName}">등록 회원 명</td> -->
   </tr>
 
   </tbody>
 
 </table>
-<button th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
-<button th:onclick="|location.href='@{/items/save}'|" th:value="|상품 등록 폼 이동|">상품 등록 폼 이동</button>
+<button class="btn btn-primary" th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
+<button class="btn btn-primary" th:onclick="|location.href='@{/items/save}'|" th:value="|상품 등록 폼 이동|">상품 등록 폼 이동</button>
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 </body>
 </html>

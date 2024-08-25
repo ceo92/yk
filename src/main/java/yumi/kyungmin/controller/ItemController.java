@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.dto.ItemDto;
@@ -37,6 +38,22 @@ public class ItemController {
     }
     itemService.register(itemDto);
     return "redirect:/items";
+  }
+
+  @GetMapping("items/update/{id}")
+  public String updateItemForm(@PathVariable Long id , Model model){
+    model.addAttribute("item" , itemService.findItem(id));
+    return "item/editItem";
+  }
+
+  @PostMapping("items/update/{id}")
+  public String updateItemPost(@PathVariable Long id , @Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult){
+    if (bindingResult.hasErrors()){
+      return "item/editItem";
+    }
+    itemService.updateItem(id , itemDto);
+    return "redirect:/items";
+
   }
 
 }

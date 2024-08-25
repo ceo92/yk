@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+
   <meta charset="UTF-8">
   <title>Title</title>
   <style>
@@ -34,8 +35,9 @@
       <div class="field-error" th:errors="*{businessNum}"></div>
     </div>
 
-    <button type="submit" th:value="등록하기">등록하기</button>
+    <button class="btn btn-primary" type="submit" th:value="등록하기">등록하기</button>
 
   </form>
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 </body>
 </html>

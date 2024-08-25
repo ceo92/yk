@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 <body>
+<h1 th:text="|${item.id}. ${item.itemName} 상품 수정|"></h1>
+  <form th:action method="post" th:object="${item}">
+
+
+    <div class="mb-3">
+      <label class="form-label" for="itemName">상품명 : </label>
+      <input th:field="*{itemName}" id="itemName" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{itemName}"></div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="price">가격 : </label>
+      <input th:field="*{price}" id="price" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{price}"></div>
+    </div>
+
+    <div class="mb-3">
+      <label for="stockQuantity">재고 수량 : </label>
+      <input th:field="*{stockQuantity}" id="stockQuantity" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{stockQuantity}"></div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">수정하기</button>
+
+
+  </form>
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 
 </body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
@@ -30,7 +31,9 @@
     </tbody>
 
   </table>
-  <button th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
-  <button th:onclick="|location.href='@{/members/save}'|" th:value="|회원 등록 폼 이동|">회원 등록 폼 이동</button>
+  <button class="btn btn-primary" th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
+  <button class="btn btn-primary" th:onclick="|location.href='@{/members/save}'|" th:value="|회원 등록 폼 이동|">회원 등록 폼 이동</button>
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
+
 </body>
 </html>
