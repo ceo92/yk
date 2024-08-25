@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 <body>
+<h1>상품 목록</h1>
+<hr>
 
+<!--<span th:if=""></span>-->
+<table>
+  <thead>
+  <tr>
+    <td><b>상품ID</b></td>
+    <td><b>상품명</b></td>
+    <td><b>가격</b></td>
+    <td><b>재고 수량</b></td>
+    <td><b>등록 날짜</b></td>
+    <td><b>수정 날짜</b></td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item : ${items}">
+    <td th:text="${item.id}">상품ID</td>
+    <td th:text="${item.itemName}">상품명</td>
+    <td th:text="${item.price}">가격</td>
+    <td th:text="${item.stockQuantity}">재고 수량</td>
+    <td th:text="${{item.registerDate}}">등록 날짜</td>
+    <td th:text="${{item.updateDate}}">수정 날짜</td>
+    <!--<td th:text="${item.member,memberName}">등록 회원 명</td> -->
+  </tr>
+
+  </tbody>
+
+</table>
+<button th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
+<button th:onclick="|location.href='@{/items/save}'|" th:value="|상품 등록 폼 이동|">상품 등록 폼 이동</button>
 </body>
 </html>

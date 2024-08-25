@@ -4,7 +4,7 @@
 <mapper namespace="yumi.kyungmin.mapper.ItemMapper">
 
   <insert id="save" keyProperty="id" useGeneratedKeys="true">
-    insert into(item_name , price , stock_quantity , register_date , update_date , member_id)
+    insert into item(item_name , price , stock_quantity , register_date , update_date)
     values(#{itemName} , #{price} , #{stockQuantity} , #{registerDate} , #{updateDate})
   </insert>
   <!--누가 상품 등록했는지는 나중에 , 로그인까지 구현해야됨-->

@@ -47,8 +47,6 @@ public class MemberController {
   /**
    * 로그인 관리
    */
-  public String login(){
 
-  }
 
 }

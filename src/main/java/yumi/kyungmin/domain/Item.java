@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
@@ -17,8 +19,10 @@ public class Item {
 
   private int stockQuantity;
 
+  @DateTimeFormat(pattern =  "yyyy-MM-dd hh:mm")
   private LocalDateTime registerDate;
 
+  @DateTimeFormat(pattern =  "yyyy-MM-dd hh:mm")
   private LocalDateTime updateDate;
 
 

@@ -18,23 +18,24 @@ public class ItemController {
 
   private final ItemService itemService;
 
-  @GetMapping("/items")
-  public String getItems(){
+  @GetMapping("items")
+  public String getItems(Model model){
+    model.addAttribute("items", itemService.findAll());
     return "item/items";
   }
 
-  @GetMapping("/items/save")
+  @GetMapping("items/save")
   public String saveItemForm(Model model){
     model.addAttribute("item" , new Item());
     return "item/saveItem";
   }
 
-  @PostMapping("/items/save")
+  @PostMapping("items/save")
   public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult){
     if (bindingResult.hasErrors()){
       return "item/saveItem";
     }
-
+    itemService.register(itemDto);
     return "redirect:/items";
   }
 

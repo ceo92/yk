@@ -14,8 +14,8 @@ public interface ItemMapper {
 
   Long save(Item item);
 
-
   void update(Item item);
+
   Optional<Item> findById(Long id);
 
   List<Item> findAll();
