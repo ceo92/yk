@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>회원 목록</h1>
+<hr>
+
+  <!--<span th:if=""></span>-->
+  <table>
+    <thead>
+      <tr>
+        <td><b>회원ID</b></td>
+        <td><b>회원명</b></td>
+        <td><b>상호명</b></td>
+        <td><b>사업자 번호</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="member : ${members}">
+        <td th:text="${member.id}">회원ID</td>
+        <td th:text="${member.memberName}">회원명</td>
+        <td th:text="${member.businessName}">상호명</td>
+        <td th:text="${member.businessNum}">사업자 번호</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+  <button th:onclick="|location.href='@{/}'|" th:value="|메인으로 이동|">메인으로 이동</button>
+  <button th:onclick="|location.href='@{/members/save}'|" th:value="|회원 등록 폼 이동|">회원 등록 폼 이동</button>
+</body>
+</html>

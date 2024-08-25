@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .field-error {
+           border-color: red;
+           color: red;
+        }
+  </style>
+</head>
+<body>
+
+<h1>회원 등록 폼</h1>
+<hr>
+  <form th:action method="post" th:object="${member}">
+    <div>
+      <label for="memberName">회원명 : </label>
+      <input th:field="*{memberName}" id="memberName" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{memberName}"></div>
+    </div>
+
+    <div>
+      <label for="businessName">상호명 : </label>
+      <input th:field="*{businessName}" id="businessName">
+      <div class="field-error" th:errors="*{businessName}"></div>
+    </div>
+
+    <div>
+      <label for="businessNum">사업자번호 : </label>
+      <input th:field="*{businessNum}" id="businessNum">
+      <div class="field-error" th:errors="*{businessNum}"></div>
+    </div>
+
+    <button type="submit" th:value="등록하기">등록하기</button>
+
+  </form>
+</body>
+</html>
