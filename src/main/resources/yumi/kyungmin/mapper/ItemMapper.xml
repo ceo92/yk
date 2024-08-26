@@ -4,9 +4,10 @@
 <mapper namespace="yumi.kyungmin.mapper.ItemMapper">
 
   <insert id="save" keyProperty="id" useGeneratedKeys="true">
-    insert into item(item_name , price , stock_quantity , register_date , update_date)
-    values(#{itemName} , #{price} , #{stockQuantity} , #{registerDate} , #{updateDate})
+    insert into item(item_name , price , stock_quantity , register_date , update_date ,member_id)
+    values(#{itemName} , #{price} , #{stockQuantity} , #{registerDate} , #{updateDate} , #{member.id})
   </insert>
+
   <!--누가 상품 등록했는지는 나중에 , 로그인까지 구현해야됨-->
   <update id="update">
     update item
@@ -15,7 +16,7 @@
   </update>
 
   <select id="findById" resultType="Item">
-    select id , item_name , price , stock_quantity , register_date , update_date
+    select *
     from item where id = #{id}
 
   </select>
@@ -26,7 +27,10 @@
   </select>
 
 
-
-
+  <select id="findAllByMember" resultType="Item"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
+    select *
+    from item i join member m
+    on i.member_id = m.id
+  </select>
 
 </mapper>

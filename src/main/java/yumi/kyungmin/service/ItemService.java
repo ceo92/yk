@@ -4,19 +4,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yumi.kyungmin.domain.Item;
+import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
 import yumi.kyungmin.mapper.ItemMapper;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ItemService {
 
   private final ItemMapper itemMapper;
 
-  public Long register(ItemDto itemDto){
+  @Transactional
+  public Long register(ItemDto itemDto , Member member){
     Item item = Item.builder().itemName(itemDto.getItemName()).price(itemDto.getPrice())
-        .stockQuantity(itemDto.getPrice()).registerDate(LocalDateTime.now()).updateDate(LocalDateTime.now()).build();
+        .stockQuantity(itemDto.getPrice()).registerDate(LocalDateTime.now()).updateDate(LocalDateTime.now()).member(member).build();
     return itemMapper.save(item);
   }
 
@@ -24,6 +28,7 @@ public class ItemService {
     return itemMapper.findById(id).orElseThrow(() -> new IllegalArgumentException("잘못된 id 입니다."));
   }
 
+  @Transactional
   public void updateItem(Long id , ItemDto itemDto){
     Item findItem = findItem(id);
     findItem.setItemName(itemDto.getItemName());
@@ -33,8 +38,12 @@ public class ItemService {
     itemMapper.update(findItem);
   }
 
-  public List<Item> findAll(){
+  public List<Item> findItems(){
     return itemMapper.findAll();
+  }
+
+  public List<Item> findItemsByMember(){
+    return itemMapper.findAllByMember();
   }
 
 

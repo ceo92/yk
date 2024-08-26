@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
-
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 <body>
-  <h1>회원 상품 관리 시스템</h1>
-  <hr>
-  <div class="mb-3">
-    <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/members}'|" th:text="|회원 관리|"></button>
-  </div>
+<h1 th:text="|경민 상품 관리 시스템|"></h1>
+<div class="mb-3">
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/login}'|" th:text="|로그인|"></button>
+</div>
 
-  <div class="mb-3">
-    <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/items}'|" th:text="|상품 관리|"></button>
-  </div>
-
+<div class="mb-3">
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/join}'|" th:text="|회원가입|"></button>
+</div>
 
 
-
-  <div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
-
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 </body>
 </html>

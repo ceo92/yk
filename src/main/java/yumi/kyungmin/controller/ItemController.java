@@ -1,5 +1,9 @@
 package yumi.kyungmin.controller;
 
+import static yumi.kyungmin.SessionConst.MEMBER_NAME;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import yumi.kyungmin.domain.Item;
+import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
 import yumi.kyungmin.service.ItemService;
 
@@ -22,7 +28,7 @@ public class ItemController {
 
   @GetMapping("items")
   public String getItems(Model model){
-    model.addAttribute("items", itemService.findAll());
+    model.addAttribute("items", itemService.findItemsByMember());
     return "item/items";
   }
 
@@ -33,11 +39,14 @@ public class ItemController {
   }
 
   @PostMapping("items/save")
-  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult , RedirectAttributes redirectAttributes){
+  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult , RedirectAttributes redirectAttributes ,
+      @SessionAttribute(name=MEMBER_NAME , required=true) Member member){
     if (bindingResult.hasErrors()){
       return "item/saveItem";
     }
-    itemService.register(itemDto);
+
+    itemService.register(itemDto , member);
+
     redirectAttributes.addAttribute("saveStatus", true);
     return "redirect:/items";
   }
