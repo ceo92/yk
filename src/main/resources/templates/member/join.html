@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .field-error {
+           border-color: red;
+           color: red;
+        }
+  </style>
+</head>
+<body>
+
+<h1>회원 등록 폼</h1>
+<hr>
+  <form th:action method="post" th:object="${member}">
+
+    <div>
+    </div>
+
+    <div>
+      <label for="loginEmail"  th:text="#{label.member.loginEmail}">로그인 이메일</label>
+      <input th:field="*{loginEmail}" id="loginEmail" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{loginEmail}"></div>
+    </div>
+
+    <div>
+      <label for="password" th:text="#{label.member.password}">비밀번호</label>
+      <input th:field="*{password}" id="password" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{password}"></div>
+    </div>
+
+    <div>
+      <label for="rePassword" th:text="#{label.member.rePassword}">비밀번호 재입력</label>
+      <input th:field="*{rePassword}" id="rePassword" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{rePassword}"></div>
+    </div>
+
+
+    <div>
+      <label for="memberName"  th:text="#{label.member.memberName}">회원명</label>
+      <input th:field="*{memberName}" id="memberName" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{memberName}"></div>
+    </div>
+
+    <div>
+      <label for="businessName"  th:text="#{label.member.businessName}">상호명</label>
+      <input th:field="*{businessName}" id="businessName" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{businessName}"></div>
+    </div>
+
+    <div>
+      <label for="businessNum"  th:text="#{label.member.businessNum}">사업자번호</label>
+      <input th:field="*{businessNum}" id="businessNum" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{businessNum}"></div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" th:text="등록하기">등록하기</button>
+
+  </form>
+<div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
+</body>
+</html>

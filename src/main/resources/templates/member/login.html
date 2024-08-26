@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragment/bootstrap.html :: bootstrap-css}">
+
+</head>
+<body>
+  <form th:object="${login}" th:action method="post">
+    <div class="md-3">
+      <label class="form-label" for="loginEmail" th:text="'로그인 이메일 입력'">로그인 아이디 입력</label>
+      <input class="" th:field="*{loginEmail}" id="loginEmail" placeholder="아이디를 입력하세요">
+    </div>
+
+    <div class="md-3">
+      <label class="form-label" for="password" th:text="'비밀번호 입력'">비밀번호 입력</label>
+      <input th:field="*{password}"  id="password" placeholder="비밀번호를 입력하세요">
+    </div>
+
+  </form>
+  <button type="submit" class="btn btn-primary" th:text="|로그인하기|"></button>
+
+
+<div th:replace="~{fragment/bootstrap.html :: bootstrap-js}"></div>
+</body>
+</html>

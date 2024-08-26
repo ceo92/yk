@@ -1,5 +1,6 @@
 package yumi.kyungmin.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import yumi.kyungmin.domain.Member;
+import yumi.kyungmin.dto.LoginDto;
 import yumi.kyungmin.dto.MemberDto;
-import yumi.kyungmin.mapper.MemberMapper;
+import yumi.kyungmin.dto.MemberSaveDto;
 import yumi.kyungmin.service.MemberService;
 
 @Controller
@@ -29,17 +31,17 @@ public class MemberController {
   }
 
   @GetMapping("members/save")
-  public String saveMemberForm(Model model){
-    model.addAttribute("member", new Member());
-    return "member/saveMember";
+  public String joinForm(Model model){
+    model.addAttribute("member", new MemberSaveDto());
+    return "member/join";
   }
 
   @PostMapping("members/save")
-  public String saveMemberForm(@Validated @ModelAttribute("member") MemberDto memberDto  , BindingResult bindingResult , RedirectAttributes redirectAttributes){
+  public String joinForm(@Validated @ModelAttribute("member") MemberSaveDto memberSaveDto  , BindingResult bindingResult , RedirectAttributes redirectAttributes){
     if (bindingResult.hasErrors()){
-      return "member/saveMember";
+      return "member/join";
     }
-    memberService.join(memberDto);
+    memberService.join(memberSaveDto);
     redirectAttributes.addAttribute("status",true); //리다이렉트 된 경로에 /members?status=true가 됨
     return "redirect:/members";
   }
@@ -47,10 +49,19 @@ public class MemberController {
   /**
    * 로그인 관리
    */
-  /*@GetMapping("login")
-  public String loginForm(){
+  @GetMapping("login")
+  public String loginForm(Model model){
+    model.addAttribute("login" , new LoginDto());
+    return "member/login";
+  }
 
-  }*/
+  @PostMapping("login")
+  public String loginPost(@Validated @ModelAttribute("login") LoginDto loginDto , BindingResult bindingResult , HttpServletRequest request){
+    if (bindingResult.hasErrors()){
+      return "member/login";
+    }
+    memberService.login(loginDto);
+  }
 
 
 

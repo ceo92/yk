@@ -2,9 +2,12 @@ package yumi.kyungmin.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import yumi.kyungmin.domain.Member;
+import yumi.kyungmin.dto.LoginDto;
 import yumi.kyungmin.dto.MemberDto;
+import yumi.kyungmin.dto.MemberSaveDto;
 import yumi.kyungmin.mapper.MemberMapper;
 
 @Service
@@ -12,9 +15,10 @@ import yumi.kyungmin.mapper.MemberMapper;
 public class MemberService {
 
   private final MemberMapper memberMapper;
+  private final PasswordEncoder passwordEncoder;
 
-  public Long join(MemberDto memberDto){
-    Member member = Member.createMember(memberDto.getMemberName(), memberDto.getBusinessName(), memberDto.getBusinessNum());
+  public Long join(MemberSaveDto memberSaveDto){
+    Member member = Member.createMember(memberSaveDto.getMemberName(), memberSaveDto.getBusinessName(), memberSaveDto.getBusinessNum());
     return memberMapper.save(member);
   }
 
@@ -27,4 +31,10 @@ public class MemberService {
   }
 
 
+  public void login(LoginDto loginDto) {
+    String loginEmail = loginDto.getLoginEmail();
+    String password = loginDto.getPassword();
+
+    findMembers().stream().filter(member -> )
+  }
 }
