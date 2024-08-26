@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.dto.ItemDto;
 import yumi.kyungmin.service.ItemService;
@@ -32,11 +33,12 @@ public class ItemController {
   }
 
   @PostMapping("items/save")
-  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult){
+  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult , RedirectAttributes redirectAttributes){
     if (bindingResult.hasErrors()){
       return "item/saveItem";
     }
     itemService.register(itemDto);
+    redirectAttributes.addAttribute("saveStatus", true);
     return "redirect:/items";
   }
 
@@ -47,11 +49,12 @@ public class ItemController {
   }
 
   @PostMapping("items/update/{id}")
-  public String updateItemPost(@PathVariable Long id , @Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult){
+  public String updateItemPost(@PathVariable Long id , @Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult , RedirectAttributes redirectAttributes){
     if (bindingResult.hasErrors()){
       return "item/editItem";
     }
     itemService.updateItem(id , itemDto);
+    redirectAttributes.addAttribute("updateStatus", true);
     return "redirect:/items";
 
   }

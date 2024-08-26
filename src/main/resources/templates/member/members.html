@@ -9,8 +9,12 @@
 <body>
 <h1>회원 목록</h1>
 <hr>
+<div th:if="${param.status}">
+  <h3 th:text="|회원 등록 성공|" style="color:blue"></h3>
+  <br>
+  <br>
+</div>
 
-  <!--<span th:if=""></span>-->
   <table>
     <thead>
       <tr>

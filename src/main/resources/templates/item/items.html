@@ -18,8 +18,16 @@
 <body>
 <h1>상품 목록</h1>
 <hr>
-
-<!--<span th:if=""></span>-->
+<div th:if="${param.saveStatus}">
+  <h3 th:text="|상품 등록 성공|" style="color:blue"></h3>
+  <br>
+  <br>
+</div>
+<div th:if="${param.updateStatus}">
+  <h3 th:text="|상품 수정 성공|" style="color:blue"></h3>
+  <br>
+  <br>
+</div>
 <table>
   <thead>
   <tr>

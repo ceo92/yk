@@ -19,7 +19,6 @@ import yumi.kyungmin.service.MemberService;
 @RequiredArgsConstructor
 public class MemberController {
 
-
   private final MemberService memberService;
 
   @GetMapping("members")
@@ -41,12 +40,18 @@ public class MemberController {
       return "member/saveMember";
     }
     memberService.join(memberDto);
+    redirectAttributes.addAttribute("status",true); //리다이렉트 된 경로에 /members?status=true가 됨
     return "redirect:/members";
   }
 
   /**
    * 로그인 관리
    */
+  /*@GetMapping("login")
+  public String loginForm(){
+
+  }*/
+
 
 
 }
