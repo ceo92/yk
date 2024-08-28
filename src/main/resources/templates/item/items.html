@@ -54,7 +54,7 @@
     <td th:text="${{item.stockQuantity}}">재고 수량</td>
     <td th:text="${{item.registerDate}}">등록 날짜</td>
     <td th:text="${{item.updateDate}}">수정 날짜</td>
-    <td th:text="${item.member}">등록 회원명</td>
+    <td th:text="${item.member.memberName}">등록 회원명</td>
     <td><button type="button" class="btn btn-primary" th:text="수정하기" th:onclick="|location.href='@{/items/update/{id}(id = ${item.id})}'|"></button></td>
 
     <!--<td th:text="${item.member,memberName}">등록 회원 명</td> -->

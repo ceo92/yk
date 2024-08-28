@@ -26,17 +26,35 @@
     from item
   </select>
 
- <!-- <resultMap id="memberMap" type="Member">
+  <resultMap id="memberMap" type="Member">
     <id property="id" column="id"/>
     <result property="name" column="name"/>
-    <association property="" javaType="com.example.Address">
+    <association property="item" javaType="Item">
       <id property="id" column="address_id"/>
       <result property="address" column="address"/>
     </association>
-  </resultMap>-->
+  </resultMap>
+
+  <resultMap id="itemsWithMember" type="Item">
+    <id column="id" property="id"/>
+    <!-- column : 테이블의 칼럼명 , property : 자바 도메인의 필드명-->
+    <result column="item_name" property="itemName"/>
+    <result column="price" property="price"/>
+    <result column="stock_quantity" property="stockQuantity"/>
+    <result column="register_date" property="registerDate"/>
+    <result column="update_date" property="updateDate"/>
+    <association property="member" javaType="Member" column="member_id">
+      <id property="id" column="id"/>
+      <result property="loginEmail" column="login_email"/>
+      <result property="password" column="password"/>
+      <result property="memberName" column="member_name"/>
+      <result property="businessName" column="business_name"/>
+      <result property="businessNum" column="business_num"/>
+    </association>
+  </resultMap>
 
 
-  <select id="findAllByMember" resultType="Item">
+  <select id="findAllByMember" resultMap="itemsWithMember">
     select *
     from item i join member m
     on i.member_id = m.id where member_id = #{id}
