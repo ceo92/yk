@@ -15,8 +15,10 @@ public class Item {
 
   private String itemName;
 
+  @NumberFormat(pattern = "#,###원")
   private int price;
 
+  @NumberFormat(pattern = "#,###개")
   private int stockQuantity;
 
   @DateTimeFormat(pattern =  "yyyy-MM-dd hh:mm")

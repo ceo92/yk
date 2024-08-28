@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+<head>
 
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <div th:replace="~{fragment/bootstrap.html :: bootstrap-css}"></div>
+
   <style>
     .field-error {
-           border-color: red;
-           color: red;
-        }
+        border-color: #dc3545;
+        color: #dc3545;
+    }
   </style>
 </head>
 <body>
@@ -26,7 +26,7 @@
   <div class="mb-3">
     <label class="form-label" for="price">가격 : </label>
     <input th:field="*{price}" id="price" th:errorclass="field-error">
-    <div class="field-error" th:errors="*{price}"></div>
+    <div th:class="field-error" th:errors="*{price}"></div>
   </div>
 
   <div class="mb-3">

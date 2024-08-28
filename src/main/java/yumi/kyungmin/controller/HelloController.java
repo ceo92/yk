@@ -1,5 +1,6 @@
 package yumi.kyungmin.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,21 +8,21 @@ import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.login.Login;
 
 @Controller
+@Slf4j
 public class HelloController {
 
 
- /* @RequestMapping
+  @RequestMapping
   public String hello(@Login Member loginMember , Model model){
+    log.info("member = {}" , loginMember);
+    //타임리프에서 th:if="member==null" 해주는 것은 특정 화
     if (loginMember == null){
       return "index";
     }
-    //model.addAttribute("member", loginMember);
-    return "member";
-  }*/
-
-  @RequestMapping
-  public String index(){
-    return "index";
+    model.addAttribute("member", loginMember);
+    return "member/member";
   }
+
+
 
 }

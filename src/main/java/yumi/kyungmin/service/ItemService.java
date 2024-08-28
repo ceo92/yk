@@ -3,6 +3,7 @@ package yumi.kyungmin.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yumi.kyungmin.domain.Item;
@@ -12,6 +13,7 @@ import yumi.kyungmin.mapper.ItemMapper;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 @Transactional(readOnly = true)
 public class ItemService {
 
@@ -42,8 +44,9 @@ public class ItemService {
     return itemMapper.findAll();
   }
 
-  public List<Item> findItemsByMember(){
-    return itemMapper.findAllByMember();
+  public List<Item> findItemsByMember(Member member){
+
+    return itemMapper.findAllByMember(member);
   }
 
 

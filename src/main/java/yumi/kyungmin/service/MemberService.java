@@ -21,7 +21,7 @@ public class MemberService {
   private final PasswordEncoder passwordEncoder;
 
   @Transactional
-  public Member join(MemberSaveDto memberSaveDto){
+  public Long join(MemberSaveDto memberSaveDto){
     String loginEmail = memberSaveDto.getLoginEmail();
     String password = memberSaveDto.getPassword();
     String rePassword = memberSaveDto.getRePassword();
@@ -36,7 +36,8 @@ public class MemberService {
     Member member = Member.createMember(loginEmail, encodedPassword,memberSaveDto.getMemberName(),
         memberSaveDto.getBusinessName(), memberSaveDto.getBusinessNum());
 
-    return memberMapper.save(member);
+    memberMapper.save(member);
+    return member.getId(); //여기서
   }
 
   public Member findMember(Long id){
@@ -54,8 +55,7 @@ public class MemberService {
     String encodedPassword = passwordEncoder.encode(password);
     return findMembers().stream().filter(
             member -> member.getLoginEmail().equals(loginEmail) && member.getPassword()
-                .equals(encodedPassword)).findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("아이디 혹은 비밀번호를 다시 한 번 확인해주세요"));
+                .equals(encodedPassword)).findFirst().orElse(null);
   }
 
 

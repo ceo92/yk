@@ -2,9 +2,13 @@ package yumi.kyungmin.controller;
 
 import static yumi.kyungmin.SessionConst.MEMBER_NAME;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,17 +22,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
+import yumi.kyungmin.login.Login;
 import yumi.kyungmin.service.ItemService;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ItemController {
-
+  //매 권한 없는 페이지 접근마다 @Login을 해줘야하나?
   private final ItemService itemService;
 
+
   @GetMapping("items")
-  public String getItems(Model model){
-    model.addAttribute("items", itemService.findItemsByMember());
+  public String getItems(@Login Member member , Model model){
+    if (member == null){
+      model.addAttribute("items" , null);
+      return "item/items";
+    }
+    List<Item> items = itemService.findItemsByMember(member);
+    log.info("member = {}", member);
+    for (Item item : items) {
+      log.info("item = {}", item);
+    }
+    model.addAttribute("items", items);
     return "item/items";
   }
 
@@ -39,12 +55,15 @@ public class ItemController {
   }
 
   @PostMapping("items/save")
-  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult , RedirectAttributes redirectAttributes ,
-      @SessionAttribute(name=MEMBER_NAME , required=true) Member member){
-    if (bindingResult.hasErrors()){
+  public String saveItemPost(@Validated @ModelAttribute("item") ItemDto itemDto , BindingResult bindingResult ,
+      @Login Member member , RedirectAttributes redirectAttributes){
+    if (bindingResult.hasErrors()){ //유효성 검사 및 Member null 검사
       return "item/saveItem";
     }
 
+    //Member 없으면 null
+    log.info("member = {}" , member);
+    //강제로 localhost:8080/items
     itemService.register(itemDto , member);
 
     redirectAttributes.addAttribute("saveStatus", true);

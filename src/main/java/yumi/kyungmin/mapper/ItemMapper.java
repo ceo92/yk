@@ -20,6 +20,6 @@ public interface ItemMapper {
 
   List<Item> findAll();
 
-  List<Item> findAllByMember();
+  List<Item> findAllByMember(Member member);
 
 }

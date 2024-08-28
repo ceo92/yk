@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
-  <meta charset="UTF-8">
-  <title>Title</title>
+<head>
+  <div th:replace="~{fragment/bootstrap.html :: bootstrap-css}"></div>
+
+  <style>
+    .field-error {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
+  </style>
 </head>
+
 <body>
-<h1 th:text="|${item.id}. ${item.itemName} 상품 수정|"></h1>
+<h1 th:text="|상품 수정 폼|"></h1>
   <form th:action method="post" th:object="${item}">
 
 

@@ -26,11 +26,22 @@
     from item
   </select>
 
+ <!-- <resultMap id="memberMap" type="Member">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <association property="" javaType="com.example.Address">
+      <id property="id" column="address_id"/>
+      <result property="address" column="address"/>
+    </association>
+  </resultMap>-->
 
-  <select id="findAllByMember" resultType="Item"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
+
+  <select id="findAllByMember" resultType="Item">
     select *
     from item i join member m
-    on i.member_id = m.id
+    on i.member_id = m.id where member_id = #{id}
   </select>
 
 </mapper>
+  <!-- 그냥 조인만 하면 전부 다 가져오므로 member_id가 #{id}인 즉 한 회원정보만 가져오게-->
+  <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->

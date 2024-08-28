@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="~{/fragment/bootstrap.html :: bootstrap-css}">
+<head>
+  <div th:replace="~{fragment/bootstrap.html :: bootstrap-css}"></div>
 
   <style>
     table {
@@ -13,6 +14,11 @@
             padding: 8px; /* 셀 내부의 여백을 줍니다. */
             text-align: center; /* 텍스트를 가운데 정렬합니다. */
         }
+
+    .field-error {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
   </style>
 </head>
 <body>
@@ -37,16 +43,18 @@
     <td><b>재고 수량</b></td>
     <td><b>등록 날짜</b></td>
     <td><b>수정 날짜</b></td>
+    <td><b>등록 회원명</b></td>
   </tr>
   </thead>
   <tbody>
   <tr th:each="item : ${items}">
     <td th:text="${item.id}">상품ID</td>
     <td th:text="${item.itemName}">상품명</td>
-    <td th:text="${item.price}">가격</td>
-    <td th:text="${item.stockQuantity}">재고 수량</td>
+    <td th:text="${{item.price}}">가격</td>
+    <td th:text="${{item.stockQuantity}}">재고 수량</td>
     <td th:text="${{item.registerDate}}">등록 날짜</td>
     <td th:text="${{item.updateDate}}">수정 날짜</td>
+    <td th:text="${item.member}">등록 회원명</td>
     <td><button type="button" class="btn btn-primary" th:text="수정하기" th:onclick="|location.href='@{/items/update/{id}(id = ${item.id})}'|"></button></td>
 
     <!--<td th:text="${item.member,memberName}">등록 회원 명</td> -->
@@ -55,7 +63,7 @@
   </tbody>
 
 </table>
-<button class="btn btn-primary" th:onclick="|location.href='@{/items}'|" th:value="|뒤로 이동|">뒤로 이동</button>
+<button class="btn btn-primary" th:onclick="|location.href='@{/member}'|" th:value="|뒤로 이동|">뒤로 이동</button>
 <button class="btn btn-primary" th:onclick="|location.href='@{/items/save}'|" th:value="|상품 등록 폼 이동|">상품 등록 폼 이동</button>
 <div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 </body>
