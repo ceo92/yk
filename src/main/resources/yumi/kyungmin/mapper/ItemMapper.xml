@@ -57,7 +57,22 @@
   <select id="findAllByMember" resultMap="itemsWithMember">
     select *
     from item i join member m
-    on i.member_id = m.id where member_id = #{id}
+    on i.member_id = m.id
+    <where>
+      <if test="member != null"> <!--member 존재하는지 검증 존재하면 외래키 -->
+        and member_id = #{member.id}
+      </if>
+      <if test="itemSearch.itemName != null and !itemSearch.itemName.equals('')"> <!-- 값이 있을 경우 , 문자열이므로 ''도 비교해야됨-->
+        and item_name like concat('%' , #{itemSearch.itemName} , '%')
+      </if>
+      <if test="itemSearch.maxPrice != null and !itemSearch.maxPrice.equals('')"> <!-- 값이 있을 경우-->
+        and price &lt;= #{itemSearch.maxPrice}
+      </if>
+
+      <if test="itemSearch.maxStockQuantity != null and !itemSearch.maxStockQuantity.equals('')">
+        and stock_quantity &lt;= #{itemSearch.maxStockQuantity}
+      </if>
+    </where>
   </select>
 
 </mapper>

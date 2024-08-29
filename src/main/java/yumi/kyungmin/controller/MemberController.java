@@ -83,7 +83,8 @@ public class MemberController {
   }
 
   @PostMapping("login")
-  public String loginPost(@Validated @ModelAttribute("login") LoginDto loginDto , BindingResult bindingResult ,RedirectAttributes redirectAttributes,  HttpServletRequest request){
+  public String loginPost(@Validated @ModelAttribute("login") LoginDto loginDto , BindingResult bindingResult
+      ,RedirectAttributes redirectAttributes,  HttpServletRequest request , Model model){
     if (bindingResult.hasErrors()){
       return "member/login";
     }
@@ -94,6 +95,7 @@ public class MemberController {
     }
     HttpSession session = request.getSession(true);
     session.setAttribute(MEMBER_NAME , loginMember);
+    model.addAttribute("member", loginMember);
     redirectAttributes.addAttribute("status", true);
     return "member/member";
   }

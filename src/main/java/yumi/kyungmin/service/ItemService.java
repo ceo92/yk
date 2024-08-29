@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
+import yumi.kyungmin.dto.ItemSearch;
 import yumi.kyungmin.mapper.ItemMapper;
 
 @Service
@@ -44,9 +45,9 @@ public class ItemService {
     return itemMapper.findAll();
   }
 
-  public List<Item> findItemsByMember(Member member){
+  public List<Item> findItemsByMember(Member member , ItemSearch itemSearch){
 
-    return itemMapper.findAllByMember(member);
+    return itemMapper.findAllByMember(member ,itemSearch);
   }
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import yumi.kyungmin.domain.Item;
 import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.ItemDto;
+import yumi.kyungmin.dto.ItemSearch;
 import yumi.kyungmin.dto.MemberDto;
 
 @Mapper
@@ -20,6 +21,6 @@ public interface ItemMapper {
 
   List<Item> findAll();
 
-  List<Item> findAllByMember(Member member);
+  List<Item> findAllByMember(@Param("member") Member member , @Param("itemSearch") ItemSearch itemSearch);
 
 }

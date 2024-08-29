@@ -19,21 +19,45 @@
         border-color: #dc3545;
         color: #dc3545;
     }
+
+    .text_color{
+       background: rgb(255,0,0);
+       background: linear-gradient(120deg, rgba(255,0,0,1) 0%, rgba(255,141,0,1) 2%, rgba(245,255,0,1) 4%,
+       rgba(34,106,42,1) 6%, rgba(4,37,240,1) 8%, rgba(13,27,147,1) 10%, rgba(94,0,255,1) 12%);
+  background-clip: text;
+-webkit-background-clip: text;
+  color: transparent;
+    }
   </style>
 </head>
 <body>
 <h1>상품 목록</h1>
 <hr>
 <div th:if="${param.saveStatus}">
-  <h3 th:text="|상품 등록 성공|" style="color:blue"></h3>
+  <h3 th:text="|상품 등록 성공|" class="text_color"></h3>
   <br>
-  <br>
+
 </div>
 <div th:if="${param.updateStatus}">
-  <h3 th:text="|상품 수정 성공|" style="color:blue"></h3>
+  <h3 th:text="|상품 수정 성공|" class="text_color"></h3>
   <br>
-  <br>
+
 </div>
+
+<!--th:object는 값 유지하기 위함 , 그러니 검색에서는 쓸 필요 없음-->
+<form method="get" th:action>
+  <label class="form-label" for="itemName" th:text="#{label.item.itemName}"></label>
+  <input type="text" th:field="${itemSearch.itemName}" id="itemName">
+
+  <label class="form-label" for="maxPrice" th:text="|최대 #{label.item.price}|"></label>
+  <input type="text" th:field="${itemSearch.maxPrice}" id="maxPrice">
+
+  <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
+  <input type="text" th:field="${itemSearch.maxStockQuantity}" id="maxStockQuantity">
+
+  <button type="submit" class="btn btn-primary" th:text="검색하기"></button> <!-- submit 해야되는 이유는 입력된 값을 다시 action으로 보내야하므로 !-->
+</form>
+
 <table>
   <thead>
   <tr>

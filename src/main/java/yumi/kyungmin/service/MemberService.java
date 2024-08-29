@@ -10,6 +10,7 @@ import yumi.kyungmin.domain.Member;
 import yumi.kyungmin.dto.LoginDto;
 import yumi.kyungmin.dto.MemberDto;
 import yumi.kyungmin.dto.MemberSaveDto;
+import yumi.kyungmin.login.Login;
 import yumi.kyungmin.mapper.MemberMapper;
 
 @Service
@@ -52,13 +53,12 @@ public class MemberService {
   public Member login(LoginDto loginDto) {
     String loginEmail = loginDto.getLoginEmail();
     String password = loginDto.getPassword();
-    String encodedPassword = passwordEncoder.encode(password);
-    return findMembers().stream().filter(
-            member -> member.getLoginEmail().equals(loginEmail) && member.getPassword()
-                .equals(encodedPassword)).findFirst().orElse(null);
+    return findMembers().stream()
+        .filter(member -> member.getLoginEmail().equals(loginEmail))
+        .filter(member -> passwordEncoder.matches(password , member.getPassword()))
+        .findFirst()
+        .orElse(null);
   }
-
-
 
   private void validateBeforeJoin(String loginEmail, String password, String rePassword) {
     //1. 이미 존재하는 아이디인지
