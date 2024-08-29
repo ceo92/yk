@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.demo.mapper.ItemMapper">
+
+  <insert id="save" keyProperty="id" useGeneratedKeys="true">
+    insert into item(item_name , price , stock_quantity , register_date , update_date ,member_id)
+    values(#{itemName} , #{price} , #{stockQuantity} , #{registerDate} , #{updateDate} , #{member.id})
+  </insert>
+
+  <!--누가 상품 등록했는지는 나중에 , 로그인까지 구현해야됨-->
+  <update id="update">
+    update item
+    set item_name = #{itemName} , price = #{price} , stock_quantity = #{stockQuantity} , update_date = #{updateDate}
+    where id = #{id}
+  </update>
+
+  <select id="findById" resultType="Item">
+    select *
+    from item where id = #{id}
+
+  </select>
+
+  <select id="findAll" resultType="Item"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
+    select *
+    from item
+  </select>
+
+  <resultMap id="memberMap" type="Member">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <association property="item" javaType="Item">
+      <id property="id" column="address_id"/>
+      <result property="address" column="address"/>
+    </association>
+  </resultMap>
+
+  <resultMap id="itemsWithMember" type="Item">
+    <id column="id" property="id"/>
+    <!-- column : 테이블의 칼럼명 , property : 자바 도메인의 필드명-->
+    <result column="item_name" property="itemName"/>
+    <result column="price" property="price"/>
+    <result column="stock_quantity" property="stockQuantity"/>
+    <result column="register_date" property="registerDate"/>
+    <result column="update_date" property="updateDate"/>
+    <association property="member" javaType="Member" column="member_id">
+      <id property="id" column="id"/>
+      <result property="loginEmail" column="login_email"/>
+      <result property="password" column="password"/>
+      <result property="memberName" column="member_name"/>
+      <result property="businessName" column="business_name"/>
+      <result property="businessNum" column="business_num"/>
+    </association>
+  </resultMap>
+
+
+  <select id="findAllByMember" resultMap="itemsWithMember">
+    select *
+    from item i join member m
+    on i.member_id = m.id
+    <where>
+      <if test="member != null"> <!--member 존재하는지 검증 존재하면 외래키 -->
+        and member_id = #{member.id}
+      </if>
+      <if test="itemSearch.itemName != null and !itemSearch.itemName.equals('')"> <!-- 값이 있을 경우 , 문자열이므로 ''도 비교해야됨-->
+        and item_name like concat('%' , #{itemSearch.itemName} , '%')
+      </if>
+      <if test="itemSearch.maxPrice != null and !itemSearch.maxPrice.equals('')"> <!-- 값이 있을 경우-->
+        and price &lt;= #{itemSearch.maxPrice}
+      </if>
+
+      <if test="itemSearch.maxStockQuantity != null and !itemSearch.maxStockQuantity.equals('')">
+        and stock_quantity &lt;= #{itemSearch.maxStockQuantity}
+      </if>
+    </where>
+  </select>
+
+</mapper>
+  <!-- 그냥 조인만 하면 전부 다 가져오므로 member_id가 #{id}인 즉 한 회원정보만 가져오게-->
+  <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.demo.mapper.MemberMapper">
+
+
+  <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    insert into member(login_email , password , member_name , business_name , business_num)
+    values(#{loginEmail}, #{password} , #{memberName} , #{businessName} , #{businessNum})
+
+  </insert>
+
+  <select id="findById" resultType="Member">
+    select *
+    from member
+    where id = #{id}
+
+  </select>
+
+  <select id="findAll" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
+    select *
+    from member
+  </select>
+
+
+
+
+
+
+</mapper>
