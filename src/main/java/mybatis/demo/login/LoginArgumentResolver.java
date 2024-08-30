@@ -19,7 +19,6 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver { //
   public boolean supportsParameter(MethodParameter parameter) {
     boolean hasLoginAnnotation = parameter.hasParameterAnnotation(Login.class);
     boolean hasMemberType = Member.class.isAssignableFrom(parameter.getParameterType());
-    log.info("supportsParameter = {}" , hasMemberType && hasLoginAnnotation);
     return hasMemberType && hasLoginAnnotation;
   }
 
@@ -28,8 +27,6 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver { //
       NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
     HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
     HttpSession session = request.getSession(false);
-    log.info("session = {}" , session);
-    log.info("resolveArgument");
     if (session == null){
       return null;
     }

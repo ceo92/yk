@@ -1,5 +1,7 @@
 package mybatis.demo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,15 +31,12 @@ public class ItemController {
 
   @GetMapping("items")
   public String getItems(@ModelAttribute("itemSearch") ItemSearch itemSearch ,BindingResult bindingResult , @Login Member member , Model model){
-    if (member == null){
-      model.addAttribute("items" , null);
-      return "item/items";
-    }
     List<Item> items = itemService.findItemsByMember(member , itemSearch);
     log.info("member = {}", member);
     for (Item item : items) {
       log.info("item = {}", item);
     }
+
     model.addAttribute("item", itemSearch);
     model.addAttribute("items", items);
     return "item/items";
@@ -76,6 +75,7 @@ public class ItemController {
     if (bindingResult.hasErrors()){
       return "item/editItem";
     }
+    HttpServletRequest request;
     itemService.updateItem(id , itemDto);
     redirectAttributes.addAttribute("updateStatus", true);
     return "redirect:/items";
