@@ -3,8 +3,13 @@ package mybatis.demo.config;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,7 +17,7 @@ import mybatis.demo.interceptor.LoginInterceptor;
 import mybatis.demo.login.LoginArgumentResolver;
 
 @Configuration
-//@EnableWebSecurity
+//@EnableWebSecurity , 이 어노테이션 쓰면 시큐리티 적용하겠다는 뜻
 public class WebConfig implements WebMvcConfigurer {
 
   @Override
@@ -29,6 +34,8 @@ public class WebConfig implements WebMvcConfigurer {
         .order(1);
   }
 
+
+
   /*@Bean
       public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(authz -> authz.anyRequest().authenticated()).formLogin(
@@ -40,8 +47,6 @@ public class WebConfig implements WebMvcConfigurer {
   public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
   }
-
-
 
 
 }

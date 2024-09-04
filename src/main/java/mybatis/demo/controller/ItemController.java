@@ -75,7 +75,6 @@ public class ItemController {
     if (bindingResult.hasErrors()){
       return "item/editItem";
     }
-    HttpServletRequest request;
     itemService.updateItem(id , itemDto);
     redirectAttributes.addAttribute("updateStatus", true);
     return "redirect:/items";

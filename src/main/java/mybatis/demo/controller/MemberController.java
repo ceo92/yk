@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -81,20 +83,21 @@ public class MemberController {
 
   @PostMapping("login")
   public String loginPost(@Validated @ModelAttribute("login") LoginDto loginDto , BindingResult bindingResult
-      ,RedirectAttributes redirectAttributes,  HttpServletRequest request , Model model){
+      ,  HttpServletRequest request , Model model){
     if (bindingResult.hasErrors()){
       return "member/login";
     }
+
     Member loginMember = memberService.login(loginDto);
     if (loginMember == null){ //예외 처리보다 null에 대한 처리가 BindingResult를 처리하는데 더 깔끔할듯? 어차피 이건 예외가 아닌 유효성 검사이니 null로 처리하는 게맞는듯?
       bindingResult.reject("loginError");
       return "member/login";
     }
+
     HttpSession session = request.getSession(true);
     session.setAttribute(MEMBER_NAME , loginMember);
     model.addAttribute("member", loginMember);
-    redirectAttributes.addAttribute("status", true);
-    return "member/member";
+    return "redirect:/member";
   }
 
   @PostMapping("logout")

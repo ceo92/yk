@@ -21,10 +21,10 @@ public class ItemService {
   private final ItemMapper itemMapper;
 
   @Transactional
-  public Long register(ItemDto itemDto , Member member){
+  public void register(ItemDto itemDto , Member member){
     Item item = Item.builder().itemName(itemDto.getItemName()).price(itemDto.getPrice())
         .stockQuantity(itemDto.getPrice()).registerDate(LocalDateTime.now()).updateDate(LocalDateTime.now()).member(member).build();
-    return itemMapper.save(item);
+    itemMapper.save(item);
   }
 
   public Item findItem(Long id){
@@ -41,9 +41,9 @@ public class ItemService {
     itemMapper.update(findItem);
   }
 
-  public List<Item> findItems(){
+  /*public List<Item> findItems(){
     return itemMapper.findAll();
-  }
+  }*/
 
   public List<Item> findItemsByMember(Member member , ItemSearch itemSearch){
 

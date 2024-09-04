@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import mybatis.demo.domain.Member;
 import mybatis.demo.login.Login;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @Slf4j
 public class HelloController {
 
+  /*@RequestMapping("main")
+  public String xxx(){
 
+  }
+*/
   @RequestMapping
   public String hello(@Login Member loginMember , Model model){
     log.info("member = {}" , loginMember);
@@ -25,5 +30,8 @@ public class HelloController {
     model.addAttribute("member", loginMember);
     return "member/member";
   }
+
+
+
 
 }

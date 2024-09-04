@@ -11,13 +11,13 @@ import mybatis.demo.dto.ItemSearch;
 @Mapper
 public interface ItemMapper {
 
-  Long save(Item item);
+  void save(Item item);
 
   void update(Item item);
 
   Optional<Item> findById(Long id);
 
-  List<Item> findAll();
+  //List<Item> findAll();
 
   List<Item> findAllByMember(@Param("member") Member member , @Param("itemSearch") ItemSearch itemSearch);
 
