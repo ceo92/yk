@@ -31,7 +31,7 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("members")
-  public String getMembers(@Login Member member , Model model){
+  public String getMembers(Model model){
     List<Member> members = memberService.findMembers();
     model.addAttribute("members" , members);
     return "member/members";

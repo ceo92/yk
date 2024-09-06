@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="bootstrap-css">
-  <a th:href="@{/}"><img th:src="@{/images/Ceing.svg}" width="250" height="100"></a>
+  <a href="/" th:href="@{/}"><img src="/images/Ceing.svg" th:src="@{/images/Ceing.svg}" width="250" height="100"></a> <!--이 경로 또한 전역이므로 인터셉터로 걸러지는 거구나 ㅇㅇ-->
   <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </div>
 
 <div th:fragment="bootstrap-js">
-  <script src="/js/bootstrap.bundle.min.js" th:href="@{/js/bootstrap.bundle.min.js}"></script>
+  <script src="/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </div>
 </html>
