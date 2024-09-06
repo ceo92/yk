@@ -31,27 +31,22 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("members")
-  public String getMembers(Model model){
+  public String getMembers(@Login Member member , Model model){
     List<Member> members = memberService.findMembers();
     model.addAttribute("members" , members);
     return "member/members";
   }
 
 
-  @GetMapping("member")//Member에 대한 null 처리는 인터셉터에서 해줌
-  public String getMember(@Login Member member , Model model){
-    model.addAttribute("member", member);
-    return "member/member";
-  }
 
 
-  @GetMapping("join")
+  @GetMapping("auth/join")
   public String joinForm(Model model){
     model.addAttribute("member", new MemberSaveDto());
     return "member/join";
   }
 
-  @PostMapping("join")
+  @PostMapping("auth/join")
   public String joinForm(@Validated @ModelAttribute("member") MemberSaveDto memberSaveDto  , BindingResult bindingResult ,
       RedirectAttributes redirectAttributes , HttpServletRequest request){
     if (bindingResult.hasErrors()){
@@ -75,13 +70,13 @@ public class MemberController {
   /**
    * 로그인 관리
    */
-  @GetMapping("login")
+  @GetMapping("auth/login")
   public String loginForm(Model model){
     model.addAttribute("login" , new LoginDto());
     return "member/login";
   }
 
-  @PostMapping("login")
+  @PostMapping("auth/login")
   public String loginPost(@Validated @ModelAttribute("login") LoginDto loginDto , BindingResult bindingResult
       ,  HttpServletRequest request , Model model){
     if (bindingResult.hasErrors()){
@@ -97,7 +92,7 @@ public class MemberController {
     HttpSession session = request.getSession(true);
     session.setAttribute(MEMBER_NAME , loginMember);
     model.addAttribute("member", loginMember);
-    return "redirect:/member";
+    return "redirect:/";
   }
 
   @PostMapping("logout")
@@ -106,7 +101,7 @@ public class MemberController {
     if (session != null){
       session.invalidate();
     }
-    return "redirect:/";
+    return "redirect:/auth"; //루트로 보내도 어차피 인터셉터에서 알아서 걸러짐
   }
 
 }

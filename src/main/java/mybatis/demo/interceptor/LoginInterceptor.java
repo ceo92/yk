@@ -14,8 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
       throws Exception {
     HttpSession session = request.getSession(false);
     if (session == null || session.getAttribute(MEMBER_NAME) == null){
-      response.sendRedirect("/"); //지정된 주소로 리다이렉트함
-      
+      response.sendRedirect("/auth"); //지정된 주소로 리다이렉트함 , 무조건 302
       return false; //이래야 컨트롤러 호출 안함
     }
 

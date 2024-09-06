@@ -8,13 +8,13 @@
   <title>Title</title>
 </head>
 <body>
-<h1 th:text="|경민 상품 관리 시스템|"></h1>
 <div class="mb-3">
-  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/login}'|" th:text="|로그인|"></button>
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/auth/login}'|" th:text="|로그인|"></button>
 </div>
 
+
 <div class="mb-3">
-  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/join}'|" th:text="|회원가입|"></button>
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/auth/join}'|" th:text="|회원가입|"></button>
 </div>
 
 

@@ -61,7 +61,7 @@ public class ItemController {
     itemService.register(itemDto , member);
 
     redirectAttributes.addAttribute("saveStatus", true);
-    return "redirect:/items";
+    return "redirect:/items"; //PRG
   }
 
   @GetMapping("items/update/{id}")
@@ -77,7 +77,7 @@ public class ItemController {
     }
     itemService.updateItem(id , itemDto);
     redirectAttributes.addAttribute("updateStatus", true);
-    return "redirect:/items";
+    return "redirect:/items"; //PRG
 
   }
 

@@ -6,11 +6,16 @@
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
-<h1 th:text="|${member.memberName}님 상품 관리|"></h1>
+<h1 th:text="|${member.memberName}님 페이지|"></h1>
 
 <div class="mb-3">
-  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/items}'|" th:text="|상품 관리 페이지|"></button>
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/members}'|" th:text="|회원 관리|"></button>
+</div>
+
+<div class="mb-3">
+  <button class="btn btn-primary" type="button" th:onclick="|location.href='@{/items}'|" th:text="|상품 관리|"></button>
 </div>
 
 <div class="mb-3">

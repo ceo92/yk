@@ -45,15 +45,15 @@
 </div>
 
 <!--th:object는 값 유지하기 위함 , 그러니 검색에서는 쓸 필요 없음-->
-<form method="get" th:action>
+<form method="get" th:action th:object="${itemSearch}">
   <label class="form-label" for="itemName" th:text="#{label.item.itemName}"></label>
-  <input type="text" th:field="${itemSearch.itemName}" id="itemName">
+  <input type="text" th:field="*{itemName}" id="itemName">
 
   <label class="form-label" for="maxPrice" th:text="|최대 #{label.item.price}|"></label>
-  <input type="text" th:field="${itemSearch.maxPrice}" id="maxPrice">
+  <input type="text" th:field="*{maxPrice}" id="maxPrice">
 
   <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
-  <input type="text" th:field="${itemSearch.maxStockQuantity}" id="maxStockQuantity">
+  <input type="text" th:field="*{maxStockQuantity}" id="maxStockQuantity">
 
   <button type="submit" class="btn btn-primary" th:text="검색하기"></button> <!-- submit 해야되는 이유는 입력된 값을 다시 action으로 보내야하므로 !-->
 </form>
@@ -87,7 +87,7 @@
   </tbody>
 
 </table>
-<button class="btn btn-primary" th:onclick="|location.href='@{/member}'|" th:value="|뒤로 이동|">뒤로 이동</button>
+<button class="btn btn-primary" th:onclick="|location.href='@{/}'|" th:value="|뒤로 이동|">뒤로 이동</button>
 <button class="btn btn-primary" th:onclick="|location.href='@{/items/save}'|" th:value="|상품 등록 폼 이동|">상품 등록 폼 이동</button>
 <div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 </body>
