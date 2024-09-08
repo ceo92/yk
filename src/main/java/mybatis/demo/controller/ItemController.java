@@ -2,7 +2,10 @@ package mybatis.demo.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,17 @@ public class ItemController {
   //매 권한 없는 페이지 접근마다 @Login을 해줘야하나?
   private final ItemService itemService;
 
+  @ModelAttribute
+  public Map<String , String> regions(){
+    Map<String, String> regions = new LinkedHashMap<>();
+    regions.put("SEOUL" , "서울");
+    regions.put("ANYANG" , "안양");
+    regions.put("DAEGU" , "대구");
+    regions.put("SUWON" , "수원");
+    regions.put("CHEONAN" , "천안");
+    return regions;
+  }
+
 
   @GetMapping("items")
   public String getItems(@ModelAttribute("itemSearch") ItemSearch itemSearch ,BindingResult bindingResult , @Login Member member , Model model){
@@ -44,7 +58,7 @@ public class ItemController {
 
   @GetMapping("items/save")
   public String saveItemForm(Model model){
-    model.addAttribute("item" , new Item());
+    model.addAttribute("item", new Item());
     return "item/saveItem";
   }
 

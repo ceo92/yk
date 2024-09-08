@@ -1,6 +1,8 @@
 package mybatis.demo.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,16 +18,24 @@ public class Item {
   private String itemName;
 
   @NumberFormat(pattern = "#,###원")
-  private int price;
+  private Integer price;
 
   @NumberFormat(pattern = "#,###개")
-  private int stockQuantity;
+  private Integer stockQuantity;
 
   @DateTimeFormat(pattern =  "yyyy-MM-dd hh:mm")
   private LocalDateTime registerDate;
 
   @DateTimeFormat(pattern =  "yyyy-MM-dd hh:mm")
   private LocalDateTime updateDate;
+
+  //단일 체크박스
+  //private Boolean is //즉시 판매여부?
+
+  private List<String> regions = new ArrayList<>(); //복수 체크박스 , 어느 지역 지점들에서 판매하게 할 것인지
+
+
+
 
 
   private Member member; //한 회원이 상품 등록하므로 , 회원 1<=>N 상품
