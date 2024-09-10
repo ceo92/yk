@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mybatis.demo.domain.ItemType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,10 @@ public class ItemController {
     regions.put("CHEONAN" , "천안");
     return regions;
   }
+
+  
+
+
 
 
   @GetMapping("items")
