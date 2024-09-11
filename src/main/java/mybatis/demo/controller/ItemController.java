@@ -2,6 +2,7 @@ package mybatis.demo.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,7 +44,24 @@ public class ItemController {
     return regions;
   }
 
-  
+  @ModelAttribute
+  public ItemType[] itemTypes(){
+    return ItemType.values();
+  }
+
+
+
+  //추후 연관관계로 빼자
+  @ModelAttribute //이게 그냥 매 호출마다 모델로 넘어감
+  public List<String> deliveryCompanies(){
+    List<String> deliveryCompanies = new ArrayList<>();
+    deliveryCompanies.add("한화 택배");
+    deliveryCompanies.add("롯데 택배");
+    deliveryCompanies.add("한진 택배");
+    deliveryCompanies.add("CJ 대한통운");
+    deliveryCompanies.add("CU 편의점택배");
+    return deliveryCompanies;
+  }
 
 
 
@@ -63,7 +81,7 @@ public class ItemController {
 
   @GetMapping("items/save")
   public String saveItemForm(Model model){
-    model.addAttribute("item", new Item());
+    model.addAttribute("item", new ItemDto());
     return "item/saveItem";
   }
 
@@ -85,7 +103,9 @@ public class ItemController {
 
   @GetMapping("items/update/{id}")
   public String updateItemForm(@PathVariable Long id , Model model){
-    model.addAttribute("item" , itemService.findItem(id));
+    Item findItem = itemService.findItem(id);
+    ItemDto itemDto = new ItemDto(findItem.getItemName() , findItem.getPrice() , findItem.getStockQuantity());
+    model.addAttribute("item" , itemDto);
     return "item/editItem";
   }
 
