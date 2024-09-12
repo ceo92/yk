@@ -74,6 +74,7 @@ public class ItemController {
       log.info("item = {}", item);
     }
 
+
     model.addAttribute("item", itemSearch);
     model.addAttribute("items", items);
     return "item/items";

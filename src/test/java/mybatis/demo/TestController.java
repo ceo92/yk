@@ -13,11 +13,4 @@ public class TestController {
   @Autowired
   private ItemService itemService;
 
-  @Test
-  void abc(){
-    List<Item> items = itemService.findItems();
-    for (Item item : items) {
-      System.out.println("item.getMember() = " + item.getMember());
-    }
-  }
 }

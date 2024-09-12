@@ -46,4 +46,15 @@ public class Item {
 */
   private Member member; //한 회원이 상품 등록하므로 , 회원 1<=>N 상품
 
+
+
+  public Item(String itemName, int price, int stockQuantity, LocalDateTime registerDate, LocalDateTime updateDate ,Member member) {
+    this.itemName = itemName;
+    this.price = price;
+    this.stockQuantity = stockQuantity;
+    this.registerDate = registerDate;
+    this.updateDate = updateDate;
+    this.member = member;
+
+  }
 }
