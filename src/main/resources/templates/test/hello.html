@@ -6,9 +6,24 @@
   <title>Title</title>
 </head>
 <body>
-  <form th:object="${item}" th:action method="post">
-    <label></label>
-    <input>
+  <form action="/test" method="post">
+    <div>
+      <label for="name">이름 입력 : </label>
+      <input type="text" id="name" name="name" >
+    </div>
+
+    <div>
+      <label for="age">나이 입력 : </label>
+      <input type="text" id="age" name="age">
+    </div>
+
+    <div>
+      <label for="sale">판매여부</label>
+      <input type="checkbox" name="sale" id="sale">
+      <input type="hidden" name="_sale">
+    </div>
+
+    <button type="submit">누르시오</button>
   </form>
 </body>
 </html>
