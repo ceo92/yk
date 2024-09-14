@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <form th:object="${user}">
+    <div>
+      <label for="name" th:text="|이름|">이름</label>
+      <input type="text" th:field="*{name}" id="name" disabled>
+    </div>
+
+    <div>
+      <label for="age" th:text="|나이|">나이</label>
+      <input type="text" th:field="*{age}" id="age" disabled>
+    </div>
+
+    <div>
+      <label for="sale" th:text="|판매여부|">판매여부</label>
+      <input type="checkbox"  th:field="*{sale}" id="sale" disabled>
+    </div>
+  </form>
+
+
+</body>
+</html>

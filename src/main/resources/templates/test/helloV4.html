@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <form th:action method="post" th:object="${user}">
+
+    <div>
+      <label for="name" th:text="|이름 입력 : |">이름</label>
+      <input type="text" th:field="*{name}" id="name">
+    </div>
+
+    <div>
+      <label for="age" th:text="|나이 입력 : |">나이</label>
+      <input type="text" th:field="*{age}" id="age">
+    </div>
+
+    <div>
+      <label for="sale" th:text="|판매여부 : |">판매여부</label>
+      <input type="checkbox" th:field="*{sale}" id="sale">
+    </div>
+
+    <div th:each="region : ${regions}">
+      <input type="checkbox" th:field="*{regions}" th:value="${region.value}"> <!-- 타임리프로 boolean이 아닌 데이터를 파싱할 때는  -->
+      <label th:for="${#ids.prev('regions')}" th:text="${region.value}"></label>
+      <!--label이 뒤로 가야되네-->
+    </div>
+
+   <!-- <th:block th:each="region : ${regions}" class="form-check form-check-inline">&lt;!&ndash;SEOUL , BUSAN , JEJU &ndash;&gt;
+      <input type="checkbox" th:field="*{regions}" th:value="${region.key}" class="form-check-input">
+      <label th:for="${#ids.prev('regions')}"
+             th:text="${region.value}" class="form-check-label"></label>
+    </th:block>-->
+
+
+    <button type="submit">누르시오</button>
+  </form>
+</body>
+</html>
