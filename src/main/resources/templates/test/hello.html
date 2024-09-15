@@ -19,8 +19,8 @@
 
     <div>
       <label for="sale">판매여부</label>
-      <input type="checkbox" name="sale" id="sale">
-      <input type="hidden" name="_sale">
+      <input type="checkbox" name="sale" id="sale"> <!--일반적인 HTTP에서는 보내질 땐 자동으로 value가 on이 지정돼서 전달됨-->
+      <input type="hidden" name="_sale"> <!--일반적인 HTTP에서는 value를 지정해야 값이 보내짐-->
     </div>
 
     <button type="submit">누르시오</button>

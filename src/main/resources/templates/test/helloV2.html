@@ -19,8 +19,16 @@
 
   <div>
     <label for="sale" th:text="|판매여부 : |">판매여부</label>
-    <input type="checkbox" th:field="*{sale}" id="sale">
+    <input type="checkbox" th:field="*{sale}" id="sale">여기서 id , name value가 지정됨 , id : sale , name : sale , value : true
   </div>
+
+  <th:block th:each="country : ${countries}">
+    <input type="checkbox" th:field="*{regions}" th:value="${country}"> <!--각 country가 할당돼야됨-->
+    <label th:for="${#ids.prev('regions')}" th:text="${country}"></label>
+  </th:block>
+
+
+
 
   <button type="submit">누르시오</button>
 </form>

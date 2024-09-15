@@ -33,7 +33,7 @@ public class TestController {
 
   private static Long sequence = 0L;
 
-  @ModelAttribute("regions") //얜 이름을 필수로 지정해줘야됨
+  /*@ModelAttribute("regions") //얜 이름을 필수로 지정해줘야됨
   public Map<String , String> regions(){
     //return regionsService.findRegions();
     Map<String, String> regions = new LinkedHashMap<>();
@@ -43,7 +43,31 @@ public class TestController {
     regions.put("SUWON" , "수원");
     regions.put("CHEONAN" , "천안");
     return regions;
+  }*/
+
+
+  @ModelAttribute("countries") //얜 이름을 필수로 지정해줘야됨
+  public List<String> countries(){
+    //return regionsService.findRegions();
+    List<String> countries = new ArrayList<>();
+    countries.add("서울");
+    countries.add("안양");
+    countries.add("대구");
+    countries.add("수원");
+    countries.add("천안");
+    return countries;
   }
+
+/*  @ModelAttribute("foods")
+  public List<Boolean> foods(){
+    List<Boolean> foods = new ArrayList<>();
+    foods.add(true);
+    foods.add(false);
+    foods.add(true);
+    foods.add(true);
+    return foods;
+  }*/
+
 
   @ModelAttribute("itemTypes")
   public ItemType[] itemTypes(){

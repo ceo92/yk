@@ -23,12 +23,21 @@
       <input type="checkbox" th:field="*{sale}" id="sale">
     </div>
 
-    <div th:each="region : ${regions}">
-      <input type="checkbox" th:field="*{regions}" th:value="${region.value}"> <!-- 타임리프로 boolean이 아닌 데이터를 파싱할 때는  -->
+   <!-- <div th:each="region : ${regions}">
+      <input type="checkbox" th:field="*{regions}" th:value="${region.value}"> &lt;!&ndash; 타임리프로 boolean이 아닌 데이터를 파싱할 때는  &ndash;&gt;
       <label th:for="${#ids.prev('regions')}" th:text="${region.value}"></label>
-      <!--label이 뒤로 가야되네-->
-    </div>
+      &lt;!&ndash;label이 뒤로 가야되네&ndash;&gt;
+    </div>-->
 
+    <th:block th:each="country : ${countries}"> <!-- id=regions1 , id=regions2 , id=regions3 , name=regions  , value = region-->
+      <input type="checkbox" th:field="*{regions}" th:value="${country}"> regions에 할당?
+      <label th:for="${#ids.prev('regions')}" th:text="${country}"></label>
+    </th:block>
+    단일 체크박스 : th:field 시 히든필드 덩달아 랜더링됨 , @ModelAttribute에선 히든필드를 보고 Boolean 값을 true로 할지 false로 할지 결정해줌
+    근데 이건 복합 체크박스임 , th:field로 지정된 regions는 컬렉션 형태로 리스트임 즉 @ModelAttribute에서 히든필드만 오면 false , 체크박스필드까지 덩달아오면 true 가 아님 아예 다른 프로세스라고 생각
+    regions를 첫 요소부터 탐색 =>
+
+    th:text는 값 출력용 , th:for은 input id에 따른 동적인 for 할당용 input id가 올라갈 때마다 덩달아 상승
    <!-- <th:block th:each="region : ${regions}" class="form-check form-check-inline">&lt;!&ndash;SEOUL , BUSAN , JEJU &ndash;&gt;
       <input type="checkbox" th:field="*{regions}" th:value="${region.key}" class="form-check-input">
       <label th:for="${#ids.prev('regions')}"
