@@ -42,7 +42,14 @@
   <div class="mb-3">
     <th:block th:each="country : ${countries}">
       <input type="checkbox" th:field="*{regions}" th:value="${country.key}">
-      <label th:for="${#ids.prev('regions')}" th:text="${country.value}"></label>
+      <label th:for="${#ids.prev('regions')}" th:text="${country.value}">지역</label>
+    </th:block>
+  </div>
+
+  <div class="mb-3">
+    <th:block th:each="itemType : ${itemTypes}">
+      <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}"> <!--id = itemType1 , id= itemType2 ,  id=itemType3 , name=itemType-->
+      <label th:for="${#ids.prev('itemType')}" th:text="${itemType.description}">상품 종류</label>
     </th:block>
   </div>
 

@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mybatis.demo.domain.ItemType;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +26,7 @@ public class ItemDto {
 
   private List<String> regions = new ArrayList<>();
 
-   
+  private ItemType itemType;
 
 
 

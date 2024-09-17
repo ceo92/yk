@@ -33,6 +33,7 @@ public class Item {
 
   private List<String> regions = new ArrayList<>();
 
+  private ItemType itemType;
 
 
   private Member member; //한 회원이 상품 등록하므로 , 회원 1<=>N 상품

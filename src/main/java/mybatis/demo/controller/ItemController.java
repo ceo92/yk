@@ -90,6 +90,8 @@ public class ItemController {
     for (String region : regions) {
       log.info("region = {}" , region);
     }
+    ItemType itemType = itemDto.getItemType();
+    log.info("itemType = {}", itemType);
 
     //Member 없으면 null
     log.info("member = {}" , member);
@@ -103,7 +105,8 @@ public class ItemController {
   @GetMapping("items/update/{id}")
   public String updateItemForm(@PathVariable Long id , Model model){
     Item findItem = itemService.findItem(id);
-    ItemDto itemDto = new ItemDto(findItem.getItemName() , findItem.getPrice() , findItem.getStockQuantity() , findItem.getRegions());
+    ItemDto itemDto = new ItemDto(findItem.getItemName() , findItem.getPrice()
+        , findItem.getStockQuantity() , findItem.getRegions() , findItem.getItemType());
     model.addAttribute("item" , itemDto);
     return "item/editItem";
   }
