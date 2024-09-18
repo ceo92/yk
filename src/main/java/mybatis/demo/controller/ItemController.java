@@ -62,7 +62,6 @@ public class ItemController {
   @GetMapping("items")
   public String getItems(@ModelAttribute("itemSearch") ItemSearch itemSearch ,BindingResult bindingResult , @Login Member member , Model model){
     List<Item> items = itemService.findItemsByMember(member , itemSearch);
-
     model.addAttribute("item", itemSearch);
     model.addAttribute("items", items);
     return "item/items";
@@ -88,6 +87,8 @@ public class ItemController {
     ItemType itemType = itemDto.getItemType();
     log.info("itemType = {}", itemType);
 
+    log.info("deliveryCompany = {}" , itemDto.getDeliveryCompany());
+
     //Member 없으면 null
     log.info("member = {}" , member);
     //강제로 localhost:8080/items
@@ -101,7 +102,8 @@ public class ItemController {
   public String updateItemForm(@PathVariable Long id , Model model){
     Item findItem = itemService.findItem(id);
     ItemDto itemDto = new ItemDto(findItem.getItemName() , findItem.getPrice()
-        , findItem.getStockQuantity() , findItem.getRegions() , findItem.getItemType());
+        , findItem.getStockQuantity() , findItem.getRegions() , findItem.getItemType() ,
+        findItem.getDeliveryCompany());
     model.addAttribute("item" , itemDto);
     return "item/editItem";
   }

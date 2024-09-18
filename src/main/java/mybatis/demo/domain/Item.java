@@ -35,6 +35,8 @@ public class Item {
 
   private ItemType itemType;
 
+  private String deliveryCompany;
+
 
   private Member member; //한 회원이 상품 등록하므로 , 회원 1<=>N 상품
 

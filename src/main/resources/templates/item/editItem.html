@@ -49,11 +49,27 @@
       </div>
     </div>
 
+    <div class="mb-3">
+      <select th:field="*{deliveryCompany}">
+        <option value="" th:text="|배송 업체를 선택하세요|"></option>
+        <option th:each="deliveryCompany : ${deliveryCompanies}"
+                th:value="${deliveryCompany}"
+                th:text="${deliveryCompany}">
+        </option>
+      </select>
+
+    </div>
 
     <button class="btn btn-primary" type="submit">수정하기</button>
 
 
   </form>
+name : 넘길 값에 대한 이름 지정용도(서버에 던질 값의 키 역할)
+value : 넘길 값에 대한 역할(서버에 던질 값 역할)
+name : value 형태로 던져짐 , attribute가 ㅇㅇ , name을 통해 value에 접근이 가능 ! 그래서 name에 필드 이름을 지정해서 필드를 통해 value값을 꺼낼 수 있는 것!
+th:text 혹은 텍스트 : 그냥 값을 출력해주는 용도임 value와 확연히 다름 , value는 내부 필드에 바인딩되는 실질적인 값이고 텍스트는 그저 보여주기 위함 용도임 ㅇㅇ
+
+
 <div th:replace="~{/fragment/bootstrap.html :: bootstrap-js}"></div>
 
 </body>

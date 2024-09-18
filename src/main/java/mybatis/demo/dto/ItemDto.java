@@ -28,6 +28,8 @@ public class ItemDto {
 
   private ItemType itemType;
 
+  private String deliveryCompany;
+
 
 
 }
