@@ -46,8 +46,6 @@ public class ItemController {
     return ItemType.values();
   }
 
-
-
   //추후 연관관계로 빼자
   @ModelAttribute("deliveryCompanies") //이게 그냥 매 호출마다 모델로 넘어감
   public List<String> deliveryCompanies(){
@@ -116,6 +114,8 @@ public class ItemController {
     if (bindingResult.hasErrors()){
       return "item/editItem";
     }
+    log.info("regions = {}" , itemDto.getRegions());
+    log.info("itemType = {}" , itemDto.getItemType());
     itemService.updateItem(id , itemDto);
     redirectAttributes.addAttribute("updateStatus", true);
     return "redirect:/items"; //PRG

@@ -35,6 +35,21 @@
       <div class="field-error" th:errors="*{stockQuantity}"></div>
     </div>
 
+    <div class="mb-3">
+      <th:block th:each="country : ${countries}"> <!--th:field는 name , id 지정 , id는 js 및 html에서 식별할 id , name인 외부 컨트롤러에서 식별할 식별자 id임 , 체크박스일 경우 히든필드도 생성해줌 , 이때 value는 알아서 감 히든필드 name은 th;field로 지정한 name 앞에 _name과 동일해짐 ㅇㅇ , 조회 시 체크돼있을 경우 checked="checked"가 자동으로 됨-->
+        <input type="checkbox" th:field="*{regions}" th:value="${country.key}"><!--주목적은 어떤 필드에 할당할지용도 왜냐하면 name을 지정하기 때문 이 name을 통해 지정된 value가 나감 , 일반필드ㅡㄴ value가 없는데 체크박스 필드는 boolean일 경우 체크 시 true 가 나가고 언체크 시 false가 나감, 하지만 string은 직접 value를 지정해줘서 체크 시 어떤 value가 나갈지를 정해줘야됨 , 또한 th:field는 name으로 지정된 필드가 값이 이미 할당돼있으면 해당 값을 가져옴 , 체크돼있으면 checked까지 해줌-->
+        <label th:for="${#ids.prev('regions')}" th:text="${country.value}">지역 체크박스</label>
+      </th:block>
+    </div>
+
+    <div class="mb-3">
+      <th:block th:each="itemType : ${itemTypes}">
+        <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}">
+        <label th:for="${#ids.prev('itemType')}" th:text="${itemType.description}">상품 종류 라디오버튼</label>
+      </th:block>
+    </div>
+
+
     <button class="btn btn-primary" type="submit">수정하기</button>
 
 
