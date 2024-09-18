@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mybatis.demo.domain.ItemType;
@@ -30,6 +32,7 @@ public class ItemController {
   //매 권한 없는 페이지 접근마다 @Login을 해줘야하나?
   private final ItemService itemService;
 
+  //이 셋 다 결국 키와 값 형태임 , 셀렉트박스 , 라디오버튼 , 체크박스 전부 키에 대한 값으로 접근 가능하게 하자 !
   @ModelAttribute("countries")
   public Map<String , String> countries(){
     Map<String, String> countries = new LinkedHashMap<>();
@@ -48,13 +51,13 @@ public class ItemController {
 
   //추후 연관관계로 빼자
   @ModelAttribute("deliveryCompanies") //이게 그냥 매 호출마다 모델로 넘어감
-  public List<String> deliveryCompanies(){
-    List<String> deliveryCompanies = new ArrayList<>();
-    deliveryCompanies.add("한화 택배");
-    deliveryCompanies.add("롯데 택배");
-    deliveryCompanies.add("한진 택배");
-    deliveryCompanies.add("CJ 대한통운");
-    deliveryCompanies.add("CU 편의점택배");
+  public List<DeliveryCompany> deliveryCompanies(){
+    List<DeliveryCompany> deliveryCompanies = new ArrayList<>();
+    deliveryCompanies.add(new DeliveryCompany("HANWHA", "한화 택배"));
+    deliveryCompanies.add(new DeliveryCompany("LOTTE", "롯데 택배"));
+    deliveryCompanies.add(new DeliveryCompany("HANJIN", "한진 택배"));
+    deliveryCompanies.add(new DeliveryCompany("CJ", "CJ 대한통운"));
+    deliveryCompanies.add(new DeliveryCompany("CU", "CU 편의점택배"));
     return deliveryCompanies;
   }
 
@@ -115,10 +118,18 @@ public class ItemController {
     }
     log.info("regions = {}" , itemDto.getRegions());
     log.info("itemType = {}" , itemDto.getItemType());
+    log.info("deliveryCompany = {}" , itemDto.getDeliveryCompany());
     itemService.updateItem(id , itemDto);
     redirectAttributes.addAttribute("updateStatus", true);
     return "redirect:/items"; //PRG
 
+  }
+
+  @Data
+  @AllArgsConstructor
+  static class DeliveryCompany{
+    private String code;
+    private String name;
   }
 
 }

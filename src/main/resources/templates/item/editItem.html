@@ -53,8 +53,8 @@
       <select th:field="*{deliveryCompany}">
         <option value="" th:text="|배송 업체를 선택하세요|"></option>
         <option th:each="deliveryCompany : ${deliveryCompanies}"
-                th:value="${deliveryCompany}"
-                th:text="${deliveryCompany}">
+                th:value="${deliveryCompany.code}"
+                th:text="${deliveryCompany.name}">
         </option>
       </select>
 
