@@ -62,10 +62,7 @@ public class ItemController {
   @GetMapping("items")
   public String getItems(@ModelAttribute("itemSearch") ItemSearch itemSearch ,BindingResult bindingResult , @Login Member member , Model model){
     List<Item> items = itemService.findItemsByMember(member , itemSearch);
-    log.info("member = {}", member);
-    for (Item item : items) {
-      log.info("item = {}", item);
-    }
+
     model.addAttribute("item", itemSearch);
     model.addAttribute("items", items);
     return "item/items";
@@ -86,7 +83,7 @@ public class ItemController {
 
     List<String> regions = itemDto.getRegions();
     for (String region : regions) {
-      log.info("region = {}" , region);
+      log.info("region = {}" , region); //name에 저장된 값으로 넘어
     }
     ItemType itemType = itemDto.getItemType();
     log.info("itemType = {}", itemType);
