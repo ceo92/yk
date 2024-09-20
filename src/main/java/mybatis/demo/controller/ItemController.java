@@ -70,6 +70,17 @@ public class ItemController {
     return "item/items";
   }
 
+
+  @GetMapping("items/{id}")
+  public String getItem(@PathVariable Long id , Model model){
+    model.addAttribute("item", itemService.findItem(id));
+    return "item/item";
+  }
+
+
+
+
+
   @GetMapping("items/save")
   public String saveItemForm(Model model){
     model.addAttribute("item", new ItemDto());
