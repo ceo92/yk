@@ -65,7 +65,6 @@ public class ItemController {
   @GetMapping("items")
   public String getItems(@ModelAttribute("itemSearch") ItemSearch itemSearch , @Login Member member ,  Model model){
     List<Item> items = itemService.findItemsByMember(member , itemSearch);
-    model.addAttribute("item", itemSearch);
     model.addAttribute("items", items);
     return "item/items";
   }
