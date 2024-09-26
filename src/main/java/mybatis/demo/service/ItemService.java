@@ -38,6 +38,7 @@ public class ItemService {
     findItem.setPrice(itemDto.getPrice());
     findItem.setStockQuantity(itemDto.getStockQuantity());
     findItem.setUpdateDate(LocalDateTime.now());
+    //Item findItem = modelMapper.map(itemDto , Item.class);
     itemMapper.update(findItem);
   }
 
@@ -46,7 +47,6 @@ public class ItemService {
   }*/
 
   public List<Item> findItemsByMember(Member member , ItemSearch itemSearch){
-
     return itemMapper.findAllByMember(member ,itemSearch);
   }
 

@@ -7,4 +7,5 @@ public class ItemSearch {
   private String itemName;
   private Integer maxPrice;
   private Integer maxStockQuantity;
+  //private Member member;
 }

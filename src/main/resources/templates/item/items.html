@@ -55,6 +55,12 @@
   <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
   <input type="text" th:field="*{maxStockQuantity}" id="maxStockQuantity">
 
+  <!--
+  <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
+  <input type="text" th:field="*{member}" id="maxStockQuantity">
+  -->
+
+
   <button type="submit" class="btn btn-primary" th:text="검색하기"></button> <!-- submit 해야되는 이유는 입력된 값을 다시 action으로 보내야하므로 !-->
 </form>
 

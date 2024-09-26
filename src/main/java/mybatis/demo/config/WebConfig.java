@@ -1,6 +1,9 @@
 package mybatis.demo.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import java.util.List;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -36,6 +39,27 @@ public class WebConfig implements WebMvcConfigurer {
         .excludePathPatterns("/test/**")
         .excludePathPatterns("/error/**")
         .order(1);
+  }
+
+
+  /**
+   * Swagger
+   */
+
+  @Bean
+  public GroupedOpenApi restApi(){
+    return GroupedOpenApi.builder().pathsToMatch("/api/**").group("REST API").build();
+  }
+
+
+
+
+
+  @Bean
+  public OpenAPI openAPI(){
+    return new OpenAPI().info(new Info().title("SpringDoc SwaggerUI example")
+            .description("Test SwaggerUI application")
+            .version("v0.0.1"));
   }
 
   /*@Bean
