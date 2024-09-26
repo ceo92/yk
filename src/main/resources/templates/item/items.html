@@ -45,6 +45,7 @@
 </div>
 
 <!--th:object는 값 유지하기 위함 , 그러니 검색에서는 쓸 필요 없음-->
+<!-- 처음엔 아무것도 지정 안돼있으니 where 조건 없이 전체 조회되고 뭐 있으면 해당 조건만큼 제거돼서 보여짐-->
 <form method="get" th:action th:object="${itemSearch}">
   <label class="form-label" for="itemName" th:text="#{label.item.itemName}"></label>
   <input type="text" th:field="*{itemName}" id="itemName">
@@ -55,26 +56,18 @@
   <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
   <input type="text" th:field="*{maxStockQuantity}" id="maxStockQuantity">
 
-  <!--
-  <label class="form-label" for="maxStockQuantity" th:text="|최대 #{label.item.stockQuantity}|"></label>
-  <input type="text" th:field="*{member}" id="maxStockQuantity">
-  -->
-
-
   <button type="submit" class="btn btn-primary" th:text="검색하기"></button> <!-- submit 해야되는 이유는 입력된 값을 다시 action으로 보내야하므로 !-->
 </form>
 
 <table>
   <thead>
-  <tr>
-    <td><b>상품ID</b></td>
-    <td><b>상품명</b></td>
-    <td><b>가격</b></td>
-    <td><b>재고 수량</b></td>
-    <td><b>등록 날짜</b></td>
-    <td><b>수정 날짜</b></td>
-    <td><b>등록 회원명</b></td>
-  </tr>
+    <th>상품ID</th>
+    <th>상품명</th>
+    <th>가격</th>
+    <th>재고 수량</th>
+    <th>등록 날짜</th>
+    <th>수정 날짜</th>
+    <th>등록 회원명</th>
   </thead>
   <tbody>
   <tr th:each="item : ${items}">
@@ -87,7 +80,6 @@
     <td th:text="${item.member.memberName}">등록 회원명</td>
     <td><button type="button" class="btn btn-primary" th:text="수정하기" th:onclick="|location.href='@{/items/update/{id}(id = ${item.id})}'|"></button></td>
 
-    <!--<td th:text="${item.member,memberName}">등록 회원 명</td> -->
   </tr>
 
   </tbody>
