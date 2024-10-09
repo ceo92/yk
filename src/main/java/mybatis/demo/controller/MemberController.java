@@ -33,17 +33,10 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("members")
-  public String getMembers(Model model){
-    List<Member> members = memberService.findMembers();
-    model.addAttribute("members" , members);
+  public String getMembers(@ModelAttribute("params")SearchDto searchDto , Model model){
+    PagingResponse<Member> response = memberService.findMembersWithPaging(searchDto);
+    model.addAttribute("response", response);
     return "member/members";
-  }
-
-  @GetMapping("members-paging")
-  public String getMembersPaging(@ModelAttribute("params")SearchDto searchDto, Model model){
-    PagingResponse<Member> members = memberService.findMembersWithPaging(searchDto);
-    model.addAttribute("members", members);
-    return "member/members-paging";
   }
 
   @GetMapping("auth/join")

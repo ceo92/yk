@@ -3,6 +3,8 @@ package mybatis.demo.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//객체로 매핑할래 Map으로 매핑할래 차이 ㅇㅇ
 public class PagingResponse<T> {
 
   private List<T> list = new ArrayList<>();
