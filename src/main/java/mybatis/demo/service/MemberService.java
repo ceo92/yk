@@ -3,6 +3,7 @@ package mybatis.demo.service;
 import java.util.List;
 import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
+import mybatis.demo.dto.PagingDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,6 +80,11 @@ public class MemberService {
     if (!password.equals(rePassword)) {
       throw new IllegalArgumentException("비밀번호를 다시 한 번 확인해주세요");
     }
+  }
+
+
+  public List<Member> findMembersWithPaging(PagingDto pagingDto){
+    return memberMapper.findAllPaging(pagingDto);
   }
 
 

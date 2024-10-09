@@ -103,7 +103,8 @@ public class ItemController {
     log.info("deliveryCompany = {}" , itemDto.getDeliveryCompany());
 
     //Member 없으면 null
-    log.info("member = {}" , member);
+    log.info("member = {}", member);
+
     //강제로 localhost:8080/items
     itemService.register(itemDto , member);
 

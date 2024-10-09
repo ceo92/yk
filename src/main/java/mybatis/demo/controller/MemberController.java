@@ -37,8 +37,10 @@ public class MemberController {
     return "member/members";
   }
 
-
-
+  @GetMapping("members-paging")
+  public String getMembersPaging(Model model){
+    return "member/members-paging";
+  }
 
   @GetMapping("auth/join")
   public String joinForm(Model model){

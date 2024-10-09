@@ -2,8 +2,10 @@ package mybatis.demo.mapper;
 
 import java.util.List;
 import java.util.Optional;
+import mybatis.demo.dto.PagingDto;
 import org.apache.ibatis.annotations.Mapper;
 import mybatis.demo.domain.Member;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -16,5 +18,7 @@ public interface MemberMapper {
 
 
   List<Member> findAll();
+
+  List<Member> findAllPaging(@Param("pagingDto") PagingDto pagingDto);
 
 }

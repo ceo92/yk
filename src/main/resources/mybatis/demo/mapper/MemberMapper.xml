@@ -6,21 +6,29 @@
 
   <insert id="save" useGeneratedKeys="true" keyProperty="id">
     insert into member(login_email , password , member_name , business_name , business_num)
-    values(#{loginEmail}, #{password} , #{memberName} , #{businessName} , #{businessNum})
+    values(#{loginEmail}, #{password} , #{memberName} , #{businessName} , #{businessNum});
 
   </insert>
 
   <select id="findById" resultType="Member">
     select *
     from member
-    where id = #{id}
+    where id = #{id};
 
   </select>
 
   <select id="findAll" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
     select *
-    from member
+    from member;
   </select>
+
+  <select id="findAllPaging" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
+    select *
+    from member
+    limit #{pagingDto.startNum} offset #{pagingDto.endNum};
+  </select>
+
+
 
 
 
