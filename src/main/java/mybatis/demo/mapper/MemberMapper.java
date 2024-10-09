@@ -3,9 +3,11 @@ package mybatis.demo.mapper;
 import java.util.List;
 import java.util.Optional;
 import mybatis.demo.dto.PagingDto;
+import mybatis.demo.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 import mybatis.demo.domain.Member;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.domain.Pageable;
 
 @Mapper
 public interface MemberMapper {
@@ -19,6 +21,17 @@ public interface MemberMapper {
 
   List<Member> findAll();
 
-  List<Member> findAllPaging(@Param("pagingDto") PagingDto pagingDto);
+
+  /**
+   * 게시글 리스트 조회
+   * return 게시글 리스트
+   */
+  List<Member> findAllPaging(@Param("searchDto") SearchDto searchDto);
+
+
+  /**
+   * 총 게시글 수 카운팅
+   */
+  Integer count(SearchDto params);
 
 }

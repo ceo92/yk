@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
 import mybatis.demo.dto.PagingDto;
+import mybatis.demo.dto.SearchDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,8 +84,8 @@ public class MemberService {
   }
 
 
-  public List<Member> findMembersWithPaging(PagingDto pagingDto){
-    return memberMapper.findAllPaging(pagingDto);
+  public List<Member> findMembersWithPaging(SearchDto searchDto){
+    return memberMapper.findAllPaging(searchDto);
   }
 
 

@@ -22,10 +22,16 @@
     from member;
   </select>
 
+  <select id="count" resultType="Integer">
+    select count(*)
+    from member;
+  </select>
+
   <select id="findAllPaging" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
     select *
     from member
-    limit #{pagingDto.startNum} offset #{pagingDto.endNum};
+    order by desc
+    limit #{searchDto.offset}  , #{searchDto.printSize};
   </select>
 
 

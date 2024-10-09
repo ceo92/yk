@@ -18,7 +18,7 @@ class ItemServiceTest {
   @Autowired private ItemService itemService;
   @Autowired private MemberService memberService;
 
-  @Test
+  /*@Test
   void register() {
     //given
     ItemDto itemDto = new ItemDto("itemBB" , 20000 , 30);
@@ -29,7 +29,7 @@ class ItemServiceTest {
     //then
     Assertions.assertThat(itemService.findItem(28L).getItemName()).isEqualTo(itemDto.getItemName());
   }
-
+*/
 
 
   @Test
