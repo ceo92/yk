@@ -31,7 +31,7 @@
     select *
     from member
     order by desc
-    limit #{searchDto.offset}  , #{searchDto.printSize};
+    limit #{searchDto.pagination.limitStart}  , #{searchDto.printSize};
   </select>
 
 

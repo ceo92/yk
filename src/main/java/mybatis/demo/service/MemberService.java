@@ -1,8 +1,11 @@
 package mybatis.demo.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
+import mybatis.demo.domain.Pagination;
+import mybatis.demo.domain.PagingResponse;
 import mybatis.demo.dto.PagingDto;
 import mybatis.demo.dto.SearchDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,8 +87,21 @@ public class MemberService {
   }
 
 
-  public List<Member> findMembersWithPaging(SearchDto searchDto){
-    return memberMapper.findAllPaging(searchDto);
+  /**
+   * 페이징 적용된 전체 리스트 조회
+   */
+
+
+  public PagingResponse<Member> findMembersWithPaging(SearchDto searchDto) {
+    Integer count = memberMapper.count(searchDto);
+    if (count < 1){
+      return new PagingResponse<>(Collections.emptyList(), null);
+    }
+
+    Pagination pagination = new Pagination(count , searchDto);
+    searchDto.setPagination(pagination);
+    List<Member> list = memberMapper.findAllPaging(searchDto);
+    return new PagingResponse<>(list, pagination);
   }
 
 

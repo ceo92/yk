@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mybatis.demo.domain.PagingResponse;
 import mybatis.demo.dto.SearchDto;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -40,7 +41,8 @@ public class MemberController {
 
   @GetMapping("members-paging")
   public String getMembersPaging(@ModelAttribute("params")SearchDto searchDto, Model model){
-    model.addAttribute("members", memberService.findMembersWithPaging(searchDto));
+    PagingResponse<Member> members = memberService.findMembersWithPaging(searchDto);
+    model.addAttribute("members", members);
     return "member/members-paging";
   }
 

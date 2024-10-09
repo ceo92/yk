@@ -1,6 +1,7 @@
 package mybatis.demo.dto;
 
 import lombok.Data;
+import mybatis.demo.domain.Pagination;
 
 @Data
 public class SearchDto {
@@ -10,6 +11,7 @@ public class SearchDto {
   private int bottomPageSize;         // 화면 하단에 출력할 페이지 사이즈
   private String searchKeyword;       // 검색 키워드
   private String searchType;    // 검색 유형
+  private Pagination pagination;
 
   //현재 페이지를처음 보여지는 페이지
   public SearchDto() {
@@ -18,7 +20,10 @@ public class SearchDto {
     this.bottomPageSize = 10; //화면 하단에 출력할 페이지 수 지정 , 기본 10개!
   }
 
-  public int getOffset() {
+  // Pagination 의 limitStart로 시작값을 대신할 것이므로 이제 안 씀
+  /*public int getOffset() {
     return (currentPageNum - 1) * printSize;
   }
+
+   */
 }
