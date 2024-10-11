@@ -30,15 +30,8 @@
   <select id="findAllPaging" resultType="Member"> <!--왜 Item일까 그냥 리턴값  하나하나가 Itemdㅣㄴ가 -->
     select *
     from member
-    order by desc
-    limit #{searchDto.pagination.limitStart}  , #{searchDto.printSize};
+    order by id desc
+    limit #{searchDto.pagination.limitStart}  , #{searchDto.recordSize};
   </select>
-
-
-
-
-
-
-
 
 </mapper>

@@ -91,7 +91,6 @@ public class MemberService {
    * 페이징 적용된 전체 리스트 조회
    */
 
-
   public PagingResponse<Member> findMembersWithPaging(SearchDto searchDto) {
     Integer count = memberMapper.count(searchDto);
     if (count < 1){

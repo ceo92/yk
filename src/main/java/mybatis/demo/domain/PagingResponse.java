@@ -2,9 +2,11 @@ package mybatis.demo.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 
 //객체로 매핑할래 Map으로 매핑할래 차이 ㅇㅇ
+@Getter
 public class PagingResponse<T> {
 
   private List<T> list = new ArrayList<>();
