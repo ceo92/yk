@@ -14,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import mybatis.demo.domain.Item;
 import mybatis.demo.domain.Member;
@@ -75,8 +77,6 @@ public class ItemController {
     model.addAttribute("item", itemService.findItem(id));
     return "item/item";
   }
-
-
 
 
 

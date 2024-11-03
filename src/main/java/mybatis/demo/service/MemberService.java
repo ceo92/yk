@@ -94,10 +94,11 @@ public class MemberService {
   public PagingResponse<Member> findMembersWithPaging(SearchDto searchDto) {
     Integer count = memberMapper.count(searchDto);
     if (count < 1){
-      return new PagingResponse<>(Collections.emptyList(), null);
+      return new PagingResponse<>(Collections.emptyList(), null); //총 개수가 아무것도 없으면 빈 리스트와 null을 던져야함
     }
+    //PagingResponse는 응답을 List<Member>와 Pagination을 같이 한꺼번에 던져야함 즉 Map<List<Member> , Pagination>도 되지만, 복잡하니 그냥 PagingResponse로 묶은 것!
 
-    Pagination pagination = new Pagination(count , searchDto);
+    Pagination pagination = new Pagination(count , searchDto); //하나라도 있으면 총 개수를 던지고, 컨트롤러로부터 넘어온 searchDto도 넘김
     searchDto.setPagination(pagination);
     List<Member> list = memberMapper.findAllPaging(searchDto);
     return new PagingResponse<>(list, pagination);
