@@ -7,7 +7,6 @@ import mybatis.demo.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 import mybatis.demo.domain.Member;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
 
 @Mapper
 public interface MemberMapper {

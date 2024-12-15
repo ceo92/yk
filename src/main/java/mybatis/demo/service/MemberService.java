@@ -86,7 +86,6 @@ public class MemberService {
     }
   }
 
-
   /**
    * 페이징 적용된 전체 리스트 조회
    */
